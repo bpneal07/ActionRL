@@ -46,8 +46,13 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 		USInteractionComponent* InteractionComp;
 
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 		USAttributeComponent* AttributeComp;
+
+	//UFUNCTION(BlueprintCallable)
+	virtual void LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride) override;
+
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -62,6 +67,7 @@ protected:
 
 	void PrimaryInteract();
 
+	void Dash();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

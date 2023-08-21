@@ -34,6 +34,8 @@ ASCharacter::ASCharacter()
 	
 }
 
+
+
 // Called when the game starts or when spawned
 void ASCharacter::BeginPlay()
 {
@@ -52,6 +54,8 @@ void ASCharacter::Tick(float DeltaTime)
 void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	bool XYOverride = false;
+	bool ZOverride = false;
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ASCharacter::MoveForward);
 	
@@ -66,6 +70,8 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("PrimaryInteract", IE_Pressed, this, &ASCharacter::PrimaryInteract);
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+
+	PlayerInputComponent->BindAction("Dash", IE_Pressed, this, &ASCharacter::Dash);
 }
 
 void ASCharacter::MoveForward(float Value)
@@ -119,4 +125,18 @@ void ASCharacter::PrimaryInteract()
 	{
 		InteractionComp->PrimaryInteract();
 	}
+}
+
+void ASCharacter::Dash()
+{
+	bool bXYOverride = false;
+	bool bZOverride = false;
+
+	OnLaunched(GetActorForwardVector(), bXYOverride, bZOverride);
+}
+
+void ASCharacter::LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride)
+{
+	OnLaunched(LaunchVelocity, bXYOverride, bZOverride);
+
 }
