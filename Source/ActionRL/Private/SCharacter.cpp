@@ -2,10 +2,13 @@
 
 
 #include "SCharacter.h"
+
+#include "SAttributeComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "SInteractionComponent.h"
+#include "SAttributeComponent.h"
 
 // Sets default values
 ASCharacter::ASCharacter()
@@ -26,6 +29,8 @@ ASCharacter::ASCharacter()
 	bUseControllerRotationYaw = false;
 
 	InteractionComp = CreateDefaultSubobject<USInteractionComponent>("InteractionComp");
+
+	AttributeComp = CreateDefaultSubobject<USAttributeComponent>("AttributeComp");
 	
 }
 
